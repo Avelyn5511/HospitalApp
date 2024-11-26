@@ -6,8 +6,13 @@ export type IntroStackParamList = {
   Departments: undefined;
   Login: undefined;
   Conditions: undefined;
+  Notification: undefined;
 };
 
 export type PropsNavigation<T extends object> = {
   navigation: NavigationProp<T>;
+};
+
+export type LoggedStackParamList = {
+  Notification: undefined;
 };
