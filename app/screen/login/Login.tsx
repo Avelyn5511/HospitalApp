@@ -1,30 +1,93 @@
-import { IntroStackParamList, PropsNavigation } from "@/app/types/types";
+import { LoggedStackParamList, PropsNavigation } from "@/app/types/types";
 import { auth } from "@/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
 import { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+interface ErrorProps {
+  text: string | null;
+}
 
 export default function Login({
   navigation,
-}: PropsNavigation<IntroStackParamList>) {
+}: PropsNavigation<LoggedStackParamList>) {
   const [cid, setCid] = useState("");
   const [pass, setPass] = useState("");
+  const [error, setError] = useState<ErrorProps>({ text: null });
 
-  const onPress = () => {
+  const [errorInput] = useState(new Animated.Value(1));
+  const [nextScreen] = useState(new Animated.Value(1));
+
+  const onPress = (): void => {
+    if (!cid || !pass) {
+      setError({ text: "Пожалуйста, введите CID и пароль" });
+      animatedError();
+      return;
+    }
+
     signInWithEmailAndPassword(auth, cid + "@gmail.ru", pass)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("пряник");
-        navigation.navigate("Notification");
+        setError({ text: "Успешный вход" });
+
+        Animated.timing(nextScreen, {
+          toValue: 1,
+          duration: 1500,
+          useNativeDriver: true,
+        }).start(() => {
+          navigation.navigate("Notification");
+        });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        if (error.code !== cid && error.code !== pass) {
+          setError({ text: "Неверный CID или Пароль" });
+        }
+        animatedError();
       });
   };
 
+  const animatedError = () => {
+    setTimeout(() => {
+      Animated.timing(errorInput, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true,
+      }).start(() => {
+        setError({ text: null });
+        errorInput.setValue(1);
+      });
+    }, 100);
+  };
+
   return (
-    <View className="bg-white w-[100%] h-[812px] p-0 m-0 flex-1 justify-between items-center">
+    <View className="bg-white w-full h-full flex-1 justify-between items-center">
+      {error.text && (
+        <Animated.View
+          style={{
+            opacity: errorInput,
+            position: "absolute",
+            top: 320,
+            left: "50%",
+            transform: [{ translateX: -125 }],
+          }}
+        >
+          <Text
+            className="text-white text-[20px] bg-primaryBlue w-[250] h-[100%] text-center
+         px-3 py-4 font-bold"
+          >
+            {error.text}
+          </Text>
+        </Animated.View>
+      )}
+
       <Image
         className="w-[100%]"
         source={require("../../../assets/images/clinic-conditions/loginupper.png")}

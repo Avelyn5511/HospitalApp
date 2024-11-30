@@ -7,6 +7,10 @@ module.exports = {
     extend: {
       colors: {
         primaryBlue: "#0089FF",
+
+        primaryTreatment: "#ED7390",
+        primaryExercises: "#E59850",
+        primaryCallDoctor: "#73E6ED",
       },
     },
   },
