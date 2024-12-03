@@ -1,4 +1,4 @@
-import LoggedStack from "@/app/screen/stacks/LoggedStack";
+import App from "@/app/App";
 import {
   NavigationContainer,
   NavigationIndependentTree,
@@ -8,7 +8,7 @@ export default function Index() {
   return (
     <NavigationIndependentTree>
       <NavigationContainer>
-        <LoggedStack />
+        <App />
       </NavigationContainer>
     </NavigationIndependentTree>
   );

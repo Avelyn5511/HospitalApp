@@ -3,6 +3,7 @@ import {
   Animated,
   Image,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -109,9 +110,11 @@ export default function Departments({
 
   return (
     <Animated.View style={[style.departments, { left: fadeAnim }]}>
-      <Text style={style.title}>Отделения клиники</Text>
+      <Text className="text-xl  font-extrabold mt-[44px] ml-[22px]">
+        Отделения клиники
+      </Text>
       <ScrollView contentContainerStyle={style.container}>
-        <View style={style.leftColumns}>
+        <View style={style.leftColumns} className="font-palatino">
           {leftDepartments.map(({ text, icon }, index) => (
             <View key={index} style={style.leftItem}>
               <Image source={icon} />
@@ -128,6 +131,7 @@ export default function Departments({
           ))}
         </View>
       </ScrollView>
+      <StatusBar barStyle="dark-content" />
     </Animated.View>
   );
 }
@@ -138,18 +142,6 @@ const style = StyleSheet.create({
     flex: 1,
   },
 
-  title: {
-    fontSize: 20,
-    color: "#000",
-    fontWeight: 800,
-    width: 237,
-    height: 36,
-    marginTop: 44,
-    marginLeft: 22,
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textShadowOffset: { width: 4, height: 4 },
-    textShadowRadius: 10,
-  },
   container: {
     display: "flex",
     flexDirection: "row",
@@ -201,7 +193,6 @@ const style = StyleSheet.create({
     width: 130,
     height: 37,
     fontWeight: 700,
-    fontFamily: "Palatino",
     textShadowColor: "rgba(0, 0, 0, 0.25)",
     textShadowOffset: { width: 4, height: 4 },
     textShadowRadius: 10,
@@ -213,7 +204,6 @@ const style = StyleSheet.create({
     fontSize: 16,
     color: "#000",
     fontWeight: 700,
-    fontFamily: "Palatino",
     fontStyle: "normal",
     textShadowColor: "rgba(0, 0, 0, 0.25)",
     textShadowOffset: { width: 4, height: 4 },

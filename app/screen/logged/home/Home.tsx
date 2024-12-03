@@ -1,9 +1,10 @@
-import { NotificationStack, PropsNavigation } from "@/app/types/types";
+import { NotificationStacks, PropsNavigation } from "@/app/types/types";
 import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Notification({
+export default function Home({
   navigation,
-}: PropsNavigation<NotificationStack>) {
+}: PropsNavigation<NotificationStacks>) {
   const goToStateHealth = (): void => {
     navigation.navigate("StateBloodPressure");
   };
@@ -26,13 +27,12 @@ export default function Notification({
     navigation.navigate("Exercise");
   };
 
-  // @ts-ignore
   return (
-    <View className="bg-white w-[100%] h-[100%]">
-      <View className="mt-[48] ml-[21]">
+    <SafeAreaView className="bg-white w-[100%] h-[100%]">
+      <View className="mt-[12] ml-[21]">
         {/* в дальнейшем будет подтягиваться фото из профиля */}
         <Image
-          source={require("../../../assets/images/Clinic-notification/IconProfile.png")}
+          source={require("../../../../assets/images/Clinic-notification/IconProfile.png")}
         />
       </View>
       <View
@@ -53,7 +53,7 @@ export default function Notification({
           className="flex w-[120] h-[140] py-[11] bg-[#73E6ED] rounded-[15]"
         >
           <Image
-            source={require("../../../assets/images/Clinic-notification/iconUser.png")}
+            source={require("../../../../assets/images/Clinic-notification/iconUser.png")}
           />
           <Text
             style={{ marginTop: 17, paddingLeft: 2 }}
@@ -69,7 +69,7 @@ export default function Notification({
           className="flex w-[120] h-full  rounded-[15]"
         >
           <Image
-            source={require("../../../assets/images/Clinic-notification/ic_round-medication.png")}
+            source={require("../../../../assets/images/Clinic-notification/ic_round-medication.png")}
           />
           <Text
             style={{ marginTop: 24 }}
@@ -85,7 +85,7 @@ export default function Notification({
           className="flex-1 w-[100%] h-full rounded-[15]"
         >
           <Image
-            source={require("../../../assets/images/Clinic-notification/u_calendar-alt.png")}
+            source={require("../../../../assets/images/Clinic-notification/u_calendar-alt.png")}
           />
           <Text
             style={{ marginTop: 21, paddingLeft: 2 }}
@@ -105,13 +105,13 @@ export default function Notification({
             className="flex flex-row gap-2.5 mb-2.5 items-center px-4"
           >
             <Image
-              source={require("../../../assets/images/Clinic-notification/heart.png")}
+              source={require("../../../../assets/images/Clinic-notification/heart.png")}
             />
             <Text className="font-normal text-[16px] overflow-hidden">
               Дневник самоконтроля АД
             </Text>
             <Image
-              source={require("../../../assets/images/Clinic-notification/symbol.png")}
+              source={require("../../../../assets/images/Clinic-notification/symbol.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -119,13 +119,13 @@ export default function Notification({
             className="flex flex-row gap-[12] mb-2.5 items-center px-[12px]"
           >
             <Image
-              source={require("../../../assets/images/Clinic-notification/blood.png")}
+              source={require("../../../../assets/images/Clinic-notification/blood.png")}
             />
             <Text className="font-normal text-[16px] overflow-hidden">
               Уровень глюкозы в крови
             </Text>
             <Image
-              source={require("../../../assets/images/Clinic-notification/symbol.png")}
+              source={require("../../../../assets/images/Clinic-notification/symbol.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -133,18 +133,18 @@ export default function Notification({
             className="flex flex-row gap-[8] items-center px-[10px]"
           >
             <Image
-              source={require("../../../assets/images/Clinic-notification/protect.png")}
+              source={require("../../../../assets/images/Clinic-notification/protect.png")}
             />
             <Text className="font-normal text-[16px] overflow-hidden">
               Дневник общего самочувствия
             </Text>
             <Image
-              source={require("../../../assets/images/Clinic-notification/symbol.png")}
+              source={require("../../../../assets/images/Clinic-notification/symbol.png")}
             />
           </TouchableOpacity>
         </View>
       </View>
       <StatusBar barStyle="dark-content" />
-    </View>
+    </SafeAreaView>
   );
 }

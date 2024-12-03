@@ -1,6 +1,4 @@
-import { LoggedStackParamList, PropsNavigation } from "@/app/types/types";
-import { auth } from "@/firebase/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signIn } from "@/appwrite/appwrite";
 
 import { useState } from "react";
 import {
@@ -16,42 +14,36 @@ interface ErrorProps {
   text: string | null;
 }
 
-export default function Login({
-  navigation,
-}: PropsNavigation<LoggedStackParamList>) {
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+export default function Login({ onLoginSuccess }: LoginProps) {
   const [cid, setCid] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState<ErrorProps>({ text: null });
 
   const [errorInput] = useState(new Animated.Value(1));
-  const [nextScreen] = useState(new Animated.Value(1));
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onPress = (): void => {
+  const onPress = async () => {
     if (!cid || !pass) {
       setError({ text: "Пожалуйста, введите CID и пароль" });
       animatedError();
       return;
     }
 
-    signInWithEmailAndPassword(auth, cid + "@gmail.ru", pass)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setError({ text: "Успешный вход" });
+    setIsSubmitting(true);
 
-        Animated.timing(nextScreen, {
-          toValue: 1,
-          duration: 1500,
-          useNativeDriver: true,
-        }).start(() => {
-          navigation.navigate("Notification");
-        });
-      })
-      .catch((error) => {
-        if (error.code !== cid && error.code !== pass) {
-          setError({ text: "Неверный CID или Пароль" });
-        }
-        animatedError();
-      });
+    try {
+      await signIn(cid, pass);
+      onLoginSuccess();
+    } catch (error) {
+      setError({ text: "Неверный CID или пароль" });
+      animatedError();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const animatedError = () => {
@@ -64,7 +56,7 @@ export default function Login({
         setError({ text: null });
         errorInput.setValue(1);
       });
-    }, 100);
+    }, 1000);
   };
 
   return (
@@ -92,19 +84,19 @@ export default function Login({
         className="w-[100%]"
         source={require("../../../assets/images/clinic-conditions/loginupper.png")}
       />
-      <Text className="text-primaryBlue text-center text-[35px] font-bold leading-normal tracking-[1.4px] w-[276px]  ">
+      <Text className="text-primaryBlue text-center text-[35px] font-nunitoBold font-bold leading-normal tracking-[1.4px] w-[276px]  ">
         Добро пожаловать!
       </Text>
       <View>
         <TextInput
-          className="rounded-[50px] bg-primaryBlue shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)]  w-[276px] h-[23px] text-white text-sm p-[0px_5px_0px_5px] placeholder-white font-bold mb-[18px]"
+          className="rounded-[50px] bg-primaryBlue shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)]  w-[276px] h-[23px] text-white text-sm p-[0px_5px_0px_5px] placeholder-white font-bold mb-[18px] font-oleo"
           placeholder="CID"
           placeholderTextColor="white"
           value={cid}
           onChangeText={setCid}
         ></TextInput>
         <TextInput
-          className="rounded-[50px] bg-primaryBlue shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)]  w-[276px] h-[23px] text-white text-sm p-[0px_5px_0px_5px] placeholder-white font-bold"
+          className="rounded-[50px] bg-primaryBlue shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)]  w-[276px] h-[23px] text-white text-sm p-[0px_5px_0px_5px] placeholder-white font-bold font-oleo"
           placeholder="Password"
           placeholderTextColor="white"
           value={pass}
@@ -114,10 +106,13 @@ export default function Login({
       </View>
       <TouchableOpacity
         onPress={onPress}
-        className="bg-primaryBlue w-[149px] h-[59px] items-center
+        disabled={isSubmitting}
+        className="bg-primaryBlue w-100% h-[59px] items-center
         justify-center p-[17px_44px_17px_44px] rounded-[50]"
       >
-        <Text className="text-lg text-white font-extrabold">Вход</Text>
+        <Text className="text-lg text-white font-extrabold">
+          {isSubmitting ? "Загрузка..." : "Вход"}
+        </Text>
       </TouchableOpacity>
       <Image
         className="w-[100%]"

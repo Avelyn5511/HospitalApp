@@ -1,4 +1,5 @@
 import { IntroStackParamList, PropsNavigation } from "@/app/types/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
   Animated,
@@ -37,7 +38,8 @@ export default function Conditions({
         duration: 500,
         useNativeDriver: false,
       }),
-    ]).start(() => {
+    ]).start(async () => {
+      await AsyncStorage.setItem("introDone", "true");
       if (!swipeLine) navigation.navigate("Login");
     });
   };

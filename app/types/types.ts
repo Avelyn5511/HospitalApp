@@ -10,7 +10,7 @@ export type IntroStackParamList = {
   Notification: undefined;
 };
 
-export type NotificationStack = {
+export type NotificationStacks = {
   Notification: undefined;
   StateHealth: undefined;
   StateLevelBloody: undefined;
@@ -18,6 +18,8 @@ export type NotificationStack = {
   Exercise: undefined;
   CourseTreatment: undefined;
   AppointmentDoctor: undefined;
+  Tabs: undefined;
+  Home: undefined;
 };
 
 export type LoggedStackParamList = {
@@ -28,6 +30,8 @@ export type LoggedStackParamList = {
   Exercise: undefined;
   CourseTreatment: undefined;
   AppointmentDoctor: undefined;
+  Tabs: undefined;
+  Home: undefined;
 };
 
 export type PropsNavigation<T extends object> = {
