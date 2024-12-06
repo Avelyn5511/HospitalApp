@@ -1,5 +1,5 @@
-import { signIn } from "@/appwrite/appwrite";
-
+import { auth } from "@/firebase/firebase";
+import { signInWithEmailAndPassword } from "@firebase/auth";
 import { useState } from "react";
 import {
   Animated,
@@ -14,11 +14,7 @@ interface ErrorProps {
   text: string | null;
 }
 
-interface LoginProps {
-  onLoginSuccess: () => void;
-}
-
-export default function Login({ onLoginSuccess }: LoginProps) {
+export default function Login() {
   const [cid, setCid] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState<ErrorProps>({ text: null });
@@ -33,17 +29,15 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       return;
     }
 
-    setIsSubmitting(true);
-
-    try {
-      await signIn(cid, pass);
-      onLoginSuccess();
-    } catch (error) {
-      setError({ text: "Неверный CID или пароль" });
-      animatedError();
-    } finally {
-      setIsSubmitting(false);
-    }
+    signInWithEmailAndPassword(auth, cid + "@gmail.ru", pass)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setIsSubmitting(true);
+      })
+      .catch((error) => {
+        setError({ text: "Неверный СID или Password" });
+        animatedError();
+      });
   };
 
   const animatedError = () => {
@@ -106,7 +100,6 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       </View>
       <TouchableOpacity
         onPress={onPress}
-        disabled={isSubmitting}
         className="bg-primaryBlue w-100% h-[59px] items-center
         justify-center p-[17px_44px_17px_44px] rounded-[50]"
       >
