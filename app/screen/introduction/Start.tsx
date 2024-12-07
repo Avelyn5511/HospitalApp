@@ -1,15 +1,23 @@
-import { IntroStackParamList, PropsNavigation } from "@/app/types/types";
+import { IntroStackParamList } from "@/app/types/types";
 import doctor from "@/assets/images/сlinic-start/doctor.png";
 import lower from "@/assets/images/сlinic-start/loverImg.png";
 import upper from "@/assets/images/сlinic-start/upperImg.png";
+import { NavigationProp } from "@react-navigation/core";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import circle from "../../../assets/images/сlinic-start/ellipse.png";
 
-export default function Start({
-  navigation,
-}: PropsNavigation<IntroStackParamList>) {
+type Props = {
+  navigation?: NavigationProp<IntroStackParamList, "Start">;
+  setShowLogin?: (value: boolean) => void;
+};
+
+export default function Start({ navigation, setShowLogin }: Props) {
   const onPress = () => {
-    navigation.navigate("Conditions");
+    if (navigation) {
+      navigation.navigate("Conditions");
+    } else if (setShowLogin) {
+      setShowLogin(true);
+    }
   };
 
   return (

@@ -1,10 +1,8 @@
-import { NotificationStacks, PropsNavigation } from "@/app/types/types";
+import { HomeTabStacks, PropsNavigation } from "@/app/types/types";
 import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Home({
-  navigation,
-}: PropsNavigation<NotificationStacks>) {
+export default function Home({ navigation }: PropsNavigation<HomeTabStacks>) {
   const goToStateHealth = (): void => {
     navigation.navigate("StateBloodPressure");
   };

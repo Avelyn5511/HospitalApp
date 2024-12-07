@@ -1,4 +1,3 @@
-import { IntroStackParamList, PropsNavigation } from "@/app/types/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
@@ -11,9 +10,11 @@ import {
   View,
 } from "react-native";
 
-export default function Conditions({
-  navigation,
-}: PropsNavigation<IntroStackParamList>) {
+type Props = {
+  setIntroDone: (done: boolean) => void;
+};
+
+export default function Conditions({ setIntroDone }: Props) {
   const [infoCondition, setInfoCondition] = useState(false);
   const [swipeLine, setSwipeLine] = useState(false);
 
@@ -40,7 +41,8 @@ export default function Conditions({
       }),
     ]).start(async () => {
       await AsyncStorage.setItem("introDone", "true");
-      if (!swipeLine) navigation.navigate("Login");
+
+      if (!swipeLine) setIntroDone(true);
     });
   };
 
