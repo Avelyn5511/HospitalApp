@@ -1,3 +1,4 @@
+import { setIsIntroDone } from "@/app/redux/slice/navigationSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
@@ -9,12 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
 
-type Props = {
-  setIntroDone: (done: boolean) => void;
-};
+export default function Conditions() {
+  const dispatch = useDispatch();
 
-export default function Conditions({ setIntroDone }: Props) {
   const [infoCondition, setInfoCondition] = useState(false);
   const [swipeLine, setSwipeLine] = useState(false);
 
@@ -42,7 +42,7 @@ export default function Conditions({ setIntroDone }: Props) {
     ]).start(async () => {
       await AsyncStorage.setItem("introDone", "true");
 
-      if (!swipeLine) setIntroDone(true);
+      if (!swipeLine) dispatch(setIsIntroDone(true));
     });
   };
 

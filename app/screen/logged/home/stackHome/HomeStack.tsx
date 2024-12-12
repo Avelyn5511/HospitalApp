@@ -1,5 +1,6 @@
 import Home from "@/app/screen/logged/home/Home";
 import AppointmentDoctor from "@/app/screen/logged/home/screenHome/AppointmentDoctor";
+import BurgerMenu from "@/app/screen/logged/home/screenHome/BurgerMenu";
 import CourseTreatment from "@/app/screen/logged/home/screenHome/CourseTreatment";
 import Exercise from "@/app/screen/logged/home/screenHome/Exercise";
 import StateBloodPressure from "@/app/screen/logged/home/screenHome/StateBloodPressure";
@@ -36,6 +37,7 @@ const HomeStack = () => {
           />
           <Stack.Screen name="StateLevelBloody" component={StateLevelBloody} />
           <Stack.Screen name="StateHealth" component={StateHealth} />
+          <Stack.Screen name="BurgerMenu" component={BurgerMenu} />
         </Stack.Navigator>
       </NavigationContainer>
     </NavigationIndependentTree>

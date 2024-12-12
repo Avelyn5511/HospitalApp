@@ -11,6 +11,8 @@ export default function RootLayout() {
     Nunito: require("../assets/fonts/Nunito.ttf"),
     OleoScript: require("../assets/fonts/OleoScript.ttf"),
     NunitoBold: require("../assets/fonts/NunitoBold.ttf"),
+    Assistant: require("../assets/fonts/Assistant.ttf"),
+    Inter: require("../assets/fonts/Inter.ttf"),
   });
 
   useEffect(() => {
@@ -23,7 +25,6 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="LoggedTabs" options={{ headerShown: false }} />
     </Stack>
   );
 }

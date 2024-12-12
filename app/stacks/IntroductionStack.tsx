@@ -9,21 +9,14 @@ import React from "react";
 
 const Stack = createStackNavigator();
 
-type Props = {
-  setIntroDone: (done: boolean) => void;
-};
-
-export default function IntroductionStack({ setIntroDone }: Props) {
+export default function IntroductionStack() {
   return (
     <NavigationIndependentTree>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Load" component={Load} />
         <Stack.Screen name="Departments" component={Departments} />
         <Stack.Screen name="Start" component={Start} />
-        <Stack.Screen
-          name="Conditions"
-          component={() => <Conditions setIntroDone={setIntroDone} />}
-        />
+        <Stack.Screen name="Conditions" component={Conditions} />
         <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationIndependentTree>

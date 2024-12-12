@@ -1,3 +1,9 @@
+import {
+  setIsIntroDone,
+  setIsLoggedIn,
+  setIsShowLogin,
+} from "@/app/redux/slice/navigationSlice";
+import { RootState } from "@/app/redux/store";
 import Start from "@/app/screen/introduction/Start";
 import Login from "@/app/screen/login/Login";
 import IntroductionStack from "@/app/stacks/IntroductionStack";
@@ -5,12 +11,14 @@ import LoggedTabs from "@/app/tabs";
 import { auth } from "@/firebase/firebase";
 import { onAuthStateChanged } from "@firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(false);
-  const [introDone, setIntroDone] = useState<boolean | null>(false);
-  const [showLogin, setShowLogin] = useState<boolean | null>(false);
+  const { isLoggedIn, isIntroDone, isShowLogin } = useSelector(
+    (state: RootState) => state.navigation,
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkIntro = async () => {
@@ -18,34 +26,34 @@ const App = () => {
       const hasVisitBefore = await AsyncStorage.getItem("hasVisitBefore");
       if (intro) {
         await AsyncStorage.setItem("hasVisitBefore", "true");
-        setIntroDone(true);
+        dispatch(setIsIntroDone(true));
       }
       if (!hasVisitBefore) {
-        setShowLogin(true);
+        dispatch(setIsShowLogin(true));
       }
     };
     void checkIntro();
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsLoggedIn(true);
+        dispatch(setIsLoggedIn(true));
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  if (!introDone) {
-    return <IntroductionStack setIntroDone={setIntroDone} />;
+  if (!isIntroDone) {
+    return <IntroductionStack />;
   }
 
   if (isLoggedIn) {
     return <LoggedTabs />;
-  } else if (showLogin) {
+  } else if (isShowLogin) {
     return <Login />;
   }
 
-  return <Start setShowLogin={setShowLogin} />;
+  return <Start />;
 };
 
 export default App;

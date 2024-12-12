@@ -1,22 +1,25 @@
+import { setIsShowLogin } from "@/app/redux/slice/navigationSlice";
 import { IntroStackParamList } from "@/app/types/types";
 import doctor from "@/assets/images/сlinic-start/doctor.png";
 import lower from "@/assets/images/сlinic-start/loverImg.png";
 import upper from "@/assets/images/сlinic-start/upperImg.png";
 import { NavigationProp } from "@react-navigation/core";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 import circle from "../../../assets/images/сlinic-start/ellipse.png";
 
 type Props = {
   navigation?: NavigationProp<IntroStackParamList, "Start">;
-  setShowLogin?: (value: boolean) => void;
 };
 
-export default function Start({ navigation, setShowLogin }: Props) {
+export default function Start({ navigation }: Props) {
+  const dispatch = useDispatch();
+
   const onPress = () => {
     if (navigation) {
       navigation.navigate("Conditions");
-    } else if (setShowLogin) {
-      setShowLogin(true);
+    } else {
+      dispatch(setIsShowLogin(true));
     }
   };
 

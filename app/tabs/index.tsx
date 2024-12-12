@@ -5,7 +5,13 @@ import Profile from "@/app/screen/logged/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationIndependentTree } from "@react-navigation/native";
 import React from "react";
-import { Image, ImageSourcePropType, View } from "react-native";
+import {
+  Image,
+  ImageSourcePropType,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +21,20 @@ type TabIconProps = {
   focused: boolean;
 };
 
-// @ts-ignore
+const BackButton = () => {
+  return (
+    <TouchableOpacity style={{ padding: 10 }}>
+      <Image
+        source={require("@/assets/images/tabs/arrow.png")}
+        resizeMode={"contain"}
+        tintColor={"#000"}
+        className="w-6 h-6"
+      />
+      <Text></Text>
+    </TouchableOpacity>
+  );
+};
+
 const TabIcon = ({ icon, color }: TabIconProps) => {
   return (
     <View>
@@ -38,6 +57,7 @@ const LoggedTabs = () => {
           component={HomeStack}
           options={{
             headerShown: false,
+            headerLeft: () => <BackButton />,
 
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
@@ -53,7 +73,8 @@ const LoggedTabs = () => {
           component={Favorite}
           options={{
             title: "Favorite",
-            headerShown: false,
+            headerShown: true,
+            headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={require("@/assets/images/tabs/favorite.png")}
@@ -68,7 +89,8 @@ const LoggedTabs = () => {
           component={Message}
           options={{
             title: "Message",
-            headerShown: false,
+            headerShown: true,
+            headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={require("@/assets/images/tabs/message.png")}
@@ -82,7 +104,8 @@ const LoggedTabs = () => {
           name="Profile"
           component={Profile}
           options={{
-            headerShown: false,
+            headerShown: true,
+            headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={require("@/assets/images/tabs/profile.png")}

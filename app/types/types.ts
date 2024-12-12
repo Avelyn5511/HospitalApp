@@ -19,6 +19,8 @@ export type HomeTabStacks = {
   AppointmentDoctor: undefined;
   Tabs: undefined;
   Home: undefined;
+  BurgerMenu: undefined;
+  Login: undefined;
 };
 
 export type PropsNavigation<T extends object> = {
