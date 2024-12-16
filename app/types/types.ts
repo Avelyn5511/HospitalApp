@@ -16,12 +16,15 @@ export type HomeTabStacks = {
   StateBloodPressure: undefined;
   Exercise: undefined;
   CourseTreatment: undefined;
-  AppointmentDoctor: undefined;
+  Appointment: undefined;
   Tabs: undefined;
   Home: undefined;
   BurgerMenu: undefined;
   Login: undefined;
+  SelectDate: undefined;
 };
+
+export type AppointmentStacks = {};
 
 export type PropsNavigation<T extends object> = {
   navigation: NavigationProp<T>;

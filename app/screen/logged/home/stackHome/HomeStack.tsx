@@ -1,5 +1,5 @@
 import Home from "@/app/screen/logged/home/Home";
-import AppointmentDoctor from "@/app/screen/logged/home/screenHome/AppointmentDoctor";
+import AppointmentStack from "@/app/screen/logged/home/screenHome/Appointment/AppointmentStack";
 import BurgerMenu from "@/app/screen/logged/home/screenHome/BurgerMenu";
 import CourseTreatment from "@/app/screen/logged/home/screenHome/CourseTreatment";
 import Exercise from "@/app/screen/logged/home/screenHome/Exercise";
@@ -24,10 +24,7 @@ const HomeStack = () => {
           initialRouteName="Home"
         >
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen
-            name="AppointmentDoctor"
-            component={AppointmentDoctor}
-          />
+          <Stack.Screen name="Appointment" component={AppointmentStack} />
           <Stack.Screen name="CourseTreatment" component={CourseTreatment} />
           <Stack.Screen name="Exercise" component={Exercise} />
 

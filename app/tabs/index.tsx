@@ -2,6 +2,8 @@ import Favorite from "@/app/screen/logged/Favorite";
 import HomeStack from "@/app/screen/logged/home/stackHome/HomeStack";
 import Message from "@/app/screen/logged/Message";
 import Profile from "@/app/screen/logged/Profile";
+
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationIndependentTree } from "@react-navigation/native";
 import React from "react";
@@ -10,7 +12,6 @@ import {
   ImageSourcePropType,
   Text,
   TouchableOpacity,
-  View,
 } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -35,19 +36,6 @@ const BackButton = () => {
   );
 };
 
-const TabIcon = ({ icon, color }: TabIconProps) => {
-  return (
-    <View>
-      <Image
-        source={icon}
-        resizeMode={"contain"}
-        tintColor={color}
-        className="w-6 h-6"
-      />
-    </View>
-  );
-};
-
 const LoggedTabs = () => {
   return (
     <NavigationIndependentTree>
@@ -58,13 +46,9 @@ const LoggedTabs = () => {
           options={{
             headerShown: false,
             headerLeft: () => <BackButton />,
-
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={require("@/assets/images/tabs/home.png")}
-                focused={focused}
-                color={color}
-              />
+            title: "",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
             ),
           }}
         />
@@ -72,15 +56,11 @@ const LoggedTabs = () => {
           name="Favorite"
           component={Favorite}
           options={{
-            title: "Favorite",
+            title: "",
             headerShown: true,
             headerLeft: () => <BackButton />,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={require("@/assets/images/tabs/favorite.png")}
-                focused={focused}
-                color={color}
-              />
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="star" size={size} color={color} />
             ),
           }}
         />
@@ -88,15 +68,11 @@ const LoggedTabs = () => {
           name="Message"
           component={Message}
           options={{
-            title: "Message",
+            title: "",
             headerShown: true,
             headerLeft: () => <BackButton />,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={require("@/assets/images/tabs/message.png")}
-                focused={focused}
-                color={color}
-              />
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="chatbox-outline" size={size} color={color} />
             ),
           }}
         />
@@ -105,13 +81,10 @@ const LoggedTabs = () => {
           component={Profile}
           options={{
             headerShown: true,
+            title: "",
             headerLeft: () => <BackButton />,
-            tabBarIcon: ({ color, focused }) => (
-              <TabIcon
-                icon={require("@/assets/images/tabs/profile.png")}
-                focused={focused}
-                color={color}
-              />
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person-outline" size={size} color={color} />
             ),
           }}
         />

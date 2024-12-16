@@ -15,7 +15,7 @@ export default function Home({ navigation }: PropsNavigation<HomeTabStacks>) {
   };
 
   const goToAppointmentDoctor = (): void => {
-    navigation.navigate("AppointmentDoctor");
+    navigation.navigate("Appointment");
   };
 
   const goToCourseTreatment = (): void => {
