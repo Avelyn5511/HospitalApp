@@ -1,3 +1,4 @@
+import Avatar from "@/app/screen/logged/home/Avatar";
 import { HomeTabStacks, PropsNavigation } from "@/app/types/types";
 import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -34,9 +35,7 @@ export default function Home({ navigation }: PropsNavigation<HomeTabStacks>) {
     <SafeAreaView className="bg-white w-[100%] h-[100%]">
       <View className="mt-[12] ml-[21] flex flex-row">
         {/* в дальнейшем будет подтягиваться фото из профиля */}
-        <Image
-          source={require("../../../../assets/images/clinic-home/IconProfile.png")}
-        />
+        <Avatar />
         <TouchableOpacity
           onPress={goToBurgerMenu}
           className=" absolute right-0 mr-[36px]"

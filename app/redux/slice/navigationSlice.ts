@@ -20,12 +20,12 @@ const navigationSlice = createSlice({
       state.isIntroDone = payload;
     },
     setIsLoggedIn: (state, { payload }: PayloadAction<boolean>) => {
+      console.log(state, payload);
       state.isLoggedIn = payload;
     },
     setIsShowLogin: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoggedIn = payload;
     },
-    setIsSignOut: (state, { payload }: PayloadAction<boolean>) => {},
   },
 });
 

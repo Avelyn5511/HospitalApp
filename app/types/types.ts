@@ -22,9 +22,20 @@ export type HomeTabStacks = {
   BurgerMenu: undefined;
   Login: undefined;
   SelectDate: undefined;
+  AppointmentStack: undefined;
 };
 
-export type AppointmentStacks = {};
+export type User = {
+  email: string;
+  avatar: string;
+  appointments: string[];
+  isDoctor: boolean;
+};
+
+export type AppointmentStacks = {
+  Appointment: undefined;
+  SelectDate: undefined;
+};
 
 export type PropsNavigation<T extends object> = {
   navigation: NavigationProp<T>;

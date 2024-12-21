@@ -1,7 +1,30 @@
+import {
+  setIsLoggedIn,
+  setIsShowLogin,
+} from "@/app/redux/slice/navigationSlice";
+import { RootState } from "@/app/redux/store";
+import { auth } from "@/firebase/firebase";
+import "firebase/compat/auth";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
 
 const BurgerMenu = () => {
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.navigation.isLoggedIn,
+  );
+  const dispatch = useDispatch();
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      dispatch(setIsShowLogin(true));
+      dispatch(setIsLoggedIn(false));
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
+  };
+
   return (
     <View>
       <SafeAreaView className="bg-white w-[100%] h-[100%]">
@@ -70,14 +93,21 @@ const BurgerMenu = () => {
                 Помощь и поддержка
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex flex-row items-center">
-              <Image
-                source={require("../../../../../assets/images/burger/exit.png")}
-              />
-              <Text className="text-[16px] font-inter font-semibold pl-9">
-                Выход
-              </Text>
-            </TouchableOpacity>
+            {isLoggedIn ? (
+              <TouchableOpacity
+                className="flex flex-row items-center"
+                onPress={handleSignOut}
+              >
+                <Image
+                  source={require("../../../../../assets/images/burger/exit.png")}
+                />
+                <Text className="text-[16px] font-inter font-semibold pl-9">
+                  Выход
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <Text>Вы не авторизованы</Text>
+            )}
           </View>
         </View>
       </SafeAreaView>
