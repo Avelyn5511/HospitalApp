@@ -155,11 +155,8 @@ const Appointment = ({ navigation }: PropsNavigation<HomeTabStacks>) => {
       <View className="mt-4">
         {filteredDoctors.map(
           ({ profession, firstName, specialization, image }, index) => (
-            <TouchableOpacity onPress={goToSelectDate}>
-              <View
-                key={index}
-                className="w-[305] h-[70] rounded-[10px] border flex flex-row items-center  mb-4 ml-[21]"
-              >
+            <TouchableOpacity onPress={goToSelectDate} key={index}>
+              <View className="w-[305] h-[70] rounded-[10px] border flex flex-row items-center  mb-4 ml-[21]">
                 <View className="w-[61] h-[43] flex-row flex justify-center items-center">
                   <Image
                     source={image}
