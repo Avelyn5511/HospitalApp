@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-const Favorite = () => {
+const Notifications = () => {
   return (
     <View>
       <Text>Favorite Component</Text>
@@ -8,4 +8,4 @@ const Favorite = () => {
   );
 };
 
-export default Favorite;
+export default Notifications;

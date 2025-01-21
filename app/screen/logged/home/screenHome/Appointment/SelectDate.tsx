@@ -75,6 +75,7 @@ const SelectDate = () => {
           display="inline"
           themeVariant="dark"
           accentColor="white"
+          locale="ru"
         />
       </View>
 
@@ -123,7 +124,7 @@ const SelectDate = () => {
         onPress={makeAppointment}
         className="w-[218] h-[52] mt-2 py-2 px-[53] bg-primaryBlue rounded-[25] flex justify-center items-center"
       >
-        <Text className="text-white text-[18px] font-nunitoBold ">
+        <Text className="text-white text-[18px] font-nunitoBold">
           Записаться
         </Text>
       </TouchableOpacity>

@@ -1,4 +1,4 @@
-import Favorite from "@/app/screen/logged/Favorite";
+import Notifications from "@/app/screen/logged/Favorite";
 import HomeStack from "@/app/screen/logged/home/stackHome/HomeStack";
 import Message from "@/app/screen/logged/Message";
 import Profile from "@/app/screen/logged/Profile";
@@ -7,20 +7,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationIndependentTree } from "@react-navigation/native";
 import React from "react";
-import {
-  Image,
-  ImageSourcePropType,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 
 const Tab = createBottomTabNavigator();
-
-type TabIconProps = {
-  icon: ImageSourcePropType;
-  color: string;
-  focused: boolean;
-};
 
 const BackButton = () => {
   return (
@@ -46,21 +35,25 @@ const LoggedTabs = () => {
           options={{
             headerShown: false,
             headerLeft: () => <BackButton />,
-            title: "",
+            title: "Главная",
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color={color} />
             ),
           }}
         />
         <Tab.Screen
-          name="Favorite"
-          component={Favorite}
+          name="Notifications"
+          component={Notifications}
           options={{
-            title: "",
+            title: "Уведомление",
             headerShown: true,
             headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="star" size={size} color={color} />
+              <Ionicons
+                name="notifications-outline"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
@@ -68,7 +61,7 @@ const LoggedTabs = () => {
           name="Message"
           component={Message}
           options={{
-            title: "",
+            title: "Чат",
             headerShown: true,
             headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, size }) => (
@@ -81,7 +74,7 @@ const LoggedTabs = () => {
           component={Profile}
           options={{
             headerShown: true,
-            title: "",
+            title: "Профиль",
             headerLeft: () => <BackButton />,
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="person-outline" size={size} color={color} />
