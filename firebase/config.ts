@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyC0lsDH3oufNiaA43qsS5T5pLvDGgXiOnY",
-  authDomain: "hospital-b603b.firebaseapp.com",
-  projectId: "hospital-b603b",
-  storageBucket: "hospital-b603b.firebasestorage.app",
-  messagingSenderId: "531072244483",
-  appId: "1:531072244483:web:cc4e288b3d1e70cb24e736",
+  apiKey: "AIzaSyAbBppBWzglf69dF0AL7_ijZPTEcOcKr8k",
+  authDomain: "hospitalapp-86c38.firebaseapp.com",
+  projectId: "hospitalapp-86c38",
+  storageBucket: "hospitalapp-86c38.firebasestorage.app",
+  messagingSenderId: "185106721484",
+  appId: "1:185106721484:web:5610e32876fa2a1b91b069"
 };
