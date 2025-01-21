@@ -24,7 +24,7 @@ const navigationSlice = createSlice({
       state.isLoggedIn = payload;
     },
     setIsShowLogin: (state, { payload }: PayloadAction<boolean>) => {
-      state.isShowLogin = payload;
+      state.isLoggedIn = payload;
     },
   },
 });

@@ -25,21 +25,17 @@ export type HomeTabStacks = {
   AppointmentStack: undefined;
 };
 
-export type StandardRole = {
-  id: string;
-  firstName: string;
-  lastName: string;
+export type User = {
   email: string;
-  avatar?: string;
-};
-
-export type User = StandardRole & {
+  avatar: string;
   appointments: string[];
+  isDoctor: boolean;
 };
 
-export type Doctor = StandardRole & {
-  specialization: string;
-}
+export type AppointmentStacks = {
+  Appointment: undefined;
+  SelectDate: undefined;
+};
 
 export type PropsNavigation<T extends object> = {
   navigation: NavigationProp<T>;

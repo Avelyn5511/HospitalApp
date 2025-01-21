@@ -1,3 +1,7 @@
+import {
+  setIsLoggedIn,
+  setIsShowLogin,
+} from "@/app/redux/slice/navigationSlice";
 import { RootState } from "@/app/redux/store";
 import { auth } from "@/firebase/firebase";
 import "firebase/compat/auth";
@@ -14,6 +18,8 @@ const BurgerMenu = () => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      dispatch(setIsShowLogin(true));
+      dispatch(setIsLoggedIn(false));
     } catch (error) {
       console.error("Ошибка при выходе:", error);
     }

@@ -29,13 +29,12 @@ export default function Login() {
       return;
     }
 
-    signInWithEmailAndPassword(auth, cid + "@gmail.com", pass)
+    signInWithEmailAndPassword(auth, cid + "@gmail.ru", pass)
       .then((userCredential) => {
         const user = userCredential.user;
         setIsSubmitting(true);
       })
       .catch((error) => {
-          console.log(error, )
         setError({ text: "Неверный СID или Password" });
         animatedError();
       });
