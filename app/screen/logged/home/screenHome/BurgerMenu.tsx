@@ -19,6 +19,8 @@ const BurgerMenu = () => {
     }
   };
 
+  const editProfile = () => {};
+
   return (
     <View>
       <SafeAreaView className="bg-white w-[100%] h-[100%]">
@@ -34,7 +36,10 @@ const BurgerMenu = () => {
             </Text>
           </View>
           <View className="w-[342] h-[162] bg-custom-bg-burger mt-[21] flex flex-col  pl-3 gap-[8] rounded-[6px]">
-            <TouchableOpacity className="flex flex-row items-center mt-3">
+            <TouchableOpacity
+              className="flex flex-row items-center mt-3"
+              onPress={editProfile}
+            >
               <Image
                 source={require("../../../../../assets/images/burger/profile.png")}
               />

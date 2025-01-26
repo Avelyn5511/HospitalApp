@@ -16,7 +16,7 @@ export const fetchUserData = async (userId: string): Promise<User> => {
     if (user.exists()) {
       const data = user.data();
       return {
-        id: data.id,
+        id: user.id,
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,

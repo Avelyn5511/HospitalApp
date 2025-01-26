@@ -9,12 +9,12 @@ const Avatar = () => {
   return avatar ? (
     <Image
       source={{ uri: `data:image/png;base64,${avatar}` }}
-      style={{ width: 50, height: 50, borderRadius: 25 }}
+      style={{ width: 50, height: 50, borderRadius: 14 }}
     />
   ) : (
     <Image
-      source={require("../../../../assets/images/clinic-home/IconProfile.png")}
-      style={{ width: 50, height: 50, borderRadius: 25 }}
+      source={require("../../../../../assets/images/clinic-home/IconProfile.png")}
+      style={{ width: 50, height: 50, borderRadius: 14 }}
     />
   );
 };

@@ -1,3 +1,4 @@
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { NavigationProp } from "@react-navigation/core";
 
 export type IntroStackParamList = {
@@ -23,6 +24,13 @@ export type HomeTabStacks = {
   Login: undefined;
   SelectDate: undefined;
   AppointmentStack: undefined;
+  Profile: undefined;
+  Message: undefined;
+  ButtonTabs: undefined;
+};
+
+type PropsNavigationTab<T extends keyof HomeTabStacks> = {
+  navigation: BottomTabNavigationProp<HomeTabStacks, T>;
 };
 
 export type User = StandardRole & {
